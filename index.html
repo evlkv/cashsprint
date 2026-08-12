@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Async Motion Landing — $2,500 USDT</title>
+  <meta name="description" content="Production motion landing built in code. Async brief, crypto checkout, fixed scope." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="top">
+    <a class="brand" href="#top" aria-label="CashSprint home">CashSprint</a>
+    <nav>
+      <a href="#offer">Offer</a>
+      <a href="#audit">Audit</a>
+      <a href="#pay">Pay</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="brand-hero">CashSprint</p>
+      <h1>Async motion landing — built in code, fixed price</h1>
+      <p class="lede">One conversion page with purposeful motion for B2B SaaS. Written brief only — no calendar required. Delivered as a production Vite build you can host anywhere.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#pay">Pay $2,500 in USDT</a>
+        <a class="btn ghost" href="#audit">Or a $449 written UX audit</a>
+      </div>
+    </section>
+
+    <section id="offer" class="block">
+      <h2>What you get</h2>
+      <p class="sub">Fulfilled asynchronously by the studio production line. You send a brief; you get a shippable page — not a Framer login and a week of meetings.</p>
+      <ul class="list">
+        <li>One primary landing page (desktop + mobile), React/Vite source + static build</li>
+        <li>Hero + 3–5 sections with 2–3 intentional motion moments</li>
+        <li>Copy pass aimed at one Core Job and clear success criteria</li>
+        <li>Deployed preview URL + zip handoff</li>
+        <li>Kickoff within 24h of on-chain USDT confirmation (written brief form, no call)</li>
+        <li>Target turnaround: 10 working days from brief completeness</li>
+      </ul>
+      <p class="price">$2,500 USDT <span>(ERC-20 · Ethereum)</span></p>
+    </section>
+
+    <section id="audit" class="block alt">
+      <h2>Tripwire: written UX audit</h2>
+      <p class="sub">Fully async. 20–40 prioritized notes as Markdown/PDF. No Loom dependency for this sprint. Soft bridge into the landing build.</p>
+      <p class="price">$449 USDT</p>
+      <a class="btn primary" href="#pay" data-amount="449">Pay audit</a>
+    </section>
+
+    <section id="pay" class="block">
+      <h2>Crypto checkout</h2>
+      <p class="sub">Send USDT on Ethereum (ERC-20) to the address below. After payment, submit email + tx hash so kickoff can start without a call.</p>
+      <div class="paybox">
+        <label for="amount">Amount (USDT)</label>
+        <select id="amount" aria-label="Payment amount">
+          <option value="2500">Async Motion Landing — $2,500</option>
+          <option value="449">Written UX Audit — $449</option>
+        </select>
+        <label for="email">Your email</label>
+        <input id="email" type="email" autocomplete="email" placeholder="you@company.com" aria-describedby="email-hint" />
+        <p id="email-hint" class="hint">Used only to confirm payment and send the written brief template.</p>
+        <label for="tx">Tx hash (after send)</label>
+        <input id="tx" type="text" placeholder="0x…" aria-label="Transaction hash" />
+        <p class="addr-label">Receive address (Ethereum)</p>
+        <code class="addr" id="addr">0xdD1729943bf7C408456cef52886ad12B05B57dC2</code>
+        <button type="button" class="btn primary" id="copy">Copy address</button>
+        <button type="button" class="btn ghost" id="lead">I’ve paid — notify kickoff</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Autonomous CashSprint · wallet monitored on-chain · card rails not connected in this build</p>
+  </footer>
+  <script src="./app.js"></script>
+</body>
+</html>
