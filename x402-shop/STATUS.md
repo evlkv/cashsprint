@@ -24,3 +24,4 @@ These paths were not in the live `1.4.0` catalog (`ping` … `ns`).
 - Target: VPS `/opt/x402-shop` via rsync, then `systemctl restart x402-shop`
 - Re-register: `public.resources.registerFromOrigin` for the origin above
 - 2026-08-18 run: shop source is in this repo; live origin still serves catalog `1.4.0` because this environment has no VPS SSH key (`Permission denied (publickey,password)`). New routes go live after `VPS_SSH_PRIVATE_KEY` is available and the unit is restarted.
+- x402scan `registerFromOrigin`: success, 28/28 existing OpenAPI resources, originId `b2e86a98-1ff4-449d-a288-4cf445a20a4c`. New paths will index on the next register after deploy.
