@@ -2,7 +2,7 @@ const PAY_TO = "0xdD1729943bf7C408456cef52886ad12B05B57dC2";
 const USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const NETWORK = "eip155:8453";
 const ORIGIN = process.env.ORIGIN || "https://volkov.evgeny.m2.fvds.ru";
-const VERSION = "1.9.0";
+const VERSION = "1.10.0";
 const PORT = Number(process.env.PORT || 4021);
 const FACILITATOR = (process.env.FACILITATOR_URL || "https://facilitator.payai.network").replace(/\/$/, "");
 const BASE_RPC = process.env.BASE_RPC || "https://mainnet.base.org";
@@ -101,7 +101,7 @@ async function fetchPublic(raw, { maxBytes = MAX_BYTES, redirect = "follow" } = 
   const u = assertPublicHttpUrl(raw);
   const res = await fetch(u.toString(), {
     redirect,
-    headers: { "user-agent": "CashSprint-Fetch/1.9" },
+    headers: { "user-agent": "CashSprint-Fetch/1.10" },
     signal: AbortSignal.timeout(12_000),
   });
   const buf = new Uint8Array(await res.arrayBuffer());
@@ -1390,6 +1390,119 @@ const ROUTES = {
         activitycontinuation: Boolean(body.activitycontinuation),
         body,
       };
+    },
+  },
+  "/pay/naptr": {
+    summary: "DNS NAPTR records",
+    description: "NAPTR records for a public domain. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "host", required: true }],
+    queryExample: { host: "example.com" },
+    example: {
+      host: "example.com",
+      naptr: [{ order: 10, preference: 100, flags: "u", service: "E2U+sip", regexp: "", replacement: "sip.example.com" }],
+    },
+    handler: async (q) => {
+      const host = String(q.get("host") || "").trim().toLowerCase();
+      if (!host || isPrivateHost(host)) throw new Error("Invalid host");
+      const naptr = (await doh(host, "NAPTR")).map((s) => {
+        const m = String(s).trim().match(/^(\d+)\s+(\d+)\s+"?([^"]*)"?\s+"?([^"]*)"?\s+"?([^"]*)"?\s+(\S+)/);
+        return m
+          ? {
+              order: Number(m[1]),
+              preference: Number(m[2]),
+              flags: m[3],
+              service: m[4],
+              regexp: m[5],
+              replacement: m[6].replace(/\.$/, ""),
+            }
+          : { raw: String(s) };
+      });
+      return { host, naptr };
+    },
+  },
+  "/pay/ptr": {
+    summary: "Reverse DNS PTR",
+    description: "PTR records for a public IPv4 address. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "ip", required: true }],
+    queryExample: { ip: "1.1.1.1" },
+    example: { ip: "1.1.1.1", ptr: ["one.one.one.one"] },
+    handler: async (q) => {
+      const ip = String(q.get("ip") || "").trim();
+      if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(ip) || isPrivateHost(ip)) throw new Error("Invalid ip");
+      const name = `${ip.split(".").reverse().join(".")}.in-addr.arpa`;
+      const ptr = (await doh(name, "PTR")).map((s) => String(s).replace(/\.$/, ""));
+      return { ip, ptr };
+    },
+  },
+  "/pay/svcb": {
+    summary: "DNS HTTPS/SVCB records",
+    description: "HTTPS (SVCB) records for a public hostname. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "host", required: true }],
+    queryExample: { host: "example.com" },
+    example: { host: "example.com", https: ["1 . alpn=\"h3,h2\""] },
+    handler: async (q) => {
+      const host = String(q.get("host") || "").trim().toLowerCase();
+      if (!host || isPrivateHost(host)) throw new Error("Invalid host");
+      const https = await doh(host, "HTTPS");
+      return { host, https };
+    },
+  },
+  "/pay/hsts": {
+    summary: "HSTS header",
+    description: "Read Strict-Transport-Security from a public URL. $0.001 USDC on Base.",
+    price: "0.001",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: "https://example.com/", status: 200, hsts: "max-age=31536000; includeSubDomains" },
+    handler: async (q) => {
+      const { url, status, headers } = await fetchPublic(q.get("url"));
+      return { url, status, hsts: headers.get("strict-transport-security") || "" };
+    },
+  },
+  "/pay/cors": {
+    summary: "CORS headers",
+    description: "Read Access-Control response headers from a public URL. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: {
+      url: "https://example.com/",
+      status: 200,
+      allowOrigin: "*",
+      allowMethods: "GET, POST",
+      allowHeaders: "",
+      exposeHeaders: "",
+      allowCredentials: "",
+      maxAge: "",
+    },
+    handler: async (q) => {
+      const { url, status, headers } = await fetchPublic(q.get("url"));
+      const pick = (name) => headers.get(name) || "";
+      return {
+        url,
+        status,
+        allowOrigin: pick("access-control-allow-origin"),
+        allowMethods: pick("access-control-allow-methods"),
+        allowHeaders: pick("access-control-allow-headers"),
+        exposeHeaders: pick("access-control-expose-headers"),
+        allowCredentials: pick("access-control-allow-credentials"),
+        maxAge: pick("access-control-max-age"),
+      };
+    },
+  },
+  "/pay/chainid": {
+    summary: "Base chain id",
+    description: "eth_chainId for Base mainnet. $0.001 USDC on Base.",
+    price: "0.001",
+    params: [],
+    queryExample: {},
+    example: { network: "base", chainId: 8453, chainIdHex: "0x2105" },
+    handler: async () => {
+      const hex = await rpc(BASE_RPC, "eth_chainId", []);
+      return { network: "base", chainId: Number(hexToBigInt(hex)), chainIdHex: hex };
     },
   },
 };
