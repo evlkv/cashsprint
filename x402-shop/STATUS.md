@@ -23,4 +23,5 @@ These paths were not in the live `1.4.0` catalog (`ping` … `ns`), or undeploye
 
 - Target: VPS `/opt/x402-shop` via rsync, then `systemctl restart x402-shop`
 - Re-register: `public.resources.registerFromOrigin` for the origin above
-- 2026-08-18 06:00 UTC run: `bun test` in `x402-shop/` is 6/6 pass. Live origin still serves catalog `1.4.0`; unpaid `GET /pay/ping` is 402 (`x402Version` 2, `scheme` exact, `network` `eip155:8453`, amount `1000`, extra name `USD Coin` version `2`). Deploy and register results follow in this file after VPS + x402scan attempts.
+- 2026-08-18 06:03 UTC run: `bun test` in `x402-shop/` is 6/6 pass. Live origin still serves catalog `1.4.0`; unpaid `GET /pay/ping` is 402 (`x402Version` 2, `scheme` exact, `network` `eip155:8453`, amount `1000`, extra name `USD Coin` version `2`). Unpaid `GET /pay/tlsa` returns 404. SSH to `root@volkov.evgeny.m2.fvds.ru` and `ubuntu@volkov.evgeny.m2.fvds.ru` is `Permission denied (publickey,password)` because this environment has no `VPS_SSH_PRIVATE_KEY`.
+- x402scan `registerFromOrigin`: success, originId `b2e86a98-1ff4-449d-a288-4cf445a20a4c`, source OpenAPI, 28/28 registered, 0 failed, 0 deprecated. New 1.11.0 paths will index after VPS deploy + another register.
