@@ -1,0 +1,27 @@
+# CashSprint x402 shop status
+
+- Origin: `https://volkov.evgeny.m2.fvds.ru`
+- Network: Base mainnet USDC (`eip155:8453`, `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`)
+- Receive wallet: `0xdD1729943bf7C408456cef52886ad12B05B57dC2`
+- Shop version: `1.110.0`
+- Batch date: `2026-08-22`
+
+## New paid GET routes this batch
+
+| Path | Price | Query | Description |
+| --- | --- | --- | --- |
+| `/pay/citation-eisbn-exam` | $0.002 | `url` | Highwire Press `name=citation_eisbn_exam` exam-prep electronic ISBNs |
+| `/pay/citation-eisbn-solutions` | $0.002 | `url` | Highwire Press `name=citation_eisbn_solutions` solutions-manual electronic ISBNs |
+| `/pay/citation-author-isni` | $0.002 | `url` | Highwire Press `name=citation_author_isni` author ISNI identifiers |
+| `/pay/citation-author-researchid` | $0.002 | `url` | Highwire Press `name=citation_author_researchid` author ResearcherID identifiers |
+| `/pay/citation-author-scopus` | $0.002 | `url` | Highwire Press `name=citation_author_scopus` author Scopus identifiers |
+| `/pay/citation-isbn-international` | $0.002 | `url` | Highwire Press `name=citation_isbn_international` international-edition ISBNs |
+
+These paths were not in the live catalog (`ping` … `ns`, plus live extras `offer-proof`, `commerce-page-audit`, `commerce-schema-fix`, `feed-page-match`, `feed-batch-match`, `merchant-feed-audit`), or undeployed batches `1.5.0`–`1.109.0` (`whois` … `citation-author-viaf`). `/pay/citation-isbn-exam` remains Highwire citation_isbn_exam; `/pay/citation-eisbn-lab` remains Highwire citation_eisbn_lab; `/pay/citation-eisbn-textbook` remains Highwire citation_eisbn_textbook; `/pay/citation-eisbn-workbook` remains Highwire citation_eisbn_workbook; `/pay/citation-isbn-solutions` remains Highwire citation_isbn_solutions; `/pay/citation-eisbn-instructor` remains Highwire citation_eisbn_instructor; `/pay/citation-funder-isni` remains Highwire citation_funder_isni; `/pay/citation-author-orcid` remains Highwire citation_author_orcid; `/pay/citation-author-viaf` remains Highwire citation_author_viaf; `/pay/citation-isbn` remains Highwire citation_isbn; `/pay/citation-isbn13` remains Highwire citation_isbn13; `/pay/citation-isbn10` remains Highwire citation_isbn10; `/pay/citation-isbn-trade` remains Highwire citation_isbn_trade. Do not use `/pay/eisbn-exam` (`/pay/citation-eisbn-exam`; `/pay/citation-isbn-exam` is print exam; `/pay/citation-eisbn-lab` is lab; `/pay/citation-eisbn-textbook` is textbook), `/pay/eisbn-solutions` (`/pay/citation-eisbn-solutions`; `/pay/citation-isbn-solutions` is print; `/pay/citation-eisbn-workbook` is workbook; `/pay/citation-eisbn-instructor` is instructor), `/pay/author-isni` (`/pay/citation-author-isni`; `/pay/citation-funder-isni` is funder; `/pay/citation-author-orcid` is orcid; `/pay/citation-author-viaf` is viaf), `/pay/author-researchid` (`/pay/citation-author-researchid`; `/pay/citation-author-orcid` is orcid; `/pay/citation-author-viaf` is viaf; `/pay/citation-author-isni` is isni), `/pay/author-scopus` (`/pay/citation-author-scopus`; `/pay/citation-author-orcid` is orcid; `/pay/citation-author-viaf` is viaf; `/pay/citation-author-researchid` is researchid), or `/pay/isbn-international` (`/pay/citation-isbn-international`; `/pay/citation-isbn` is isbn; `/pay/citation-isbn13` is isbn13; `/pay/citation-isbn10` is isbn10). Remaining Highwire tags include citation_eisbn_international, citation_isbn_global, citation_author_researcherid, citation_author_wos, citation_author_loop, and citation_isbn_european. Client landing files were not changed.
+
+## Deploy / register
+
+- Target: VPS `/opt/x402-shop` via rsync, then `systemctl restart x402-shop`
+- Re-register: `public.resources.registerFromOrigin` for the origin above
+- 2026-08-22 21:04 UTC run: `bun test` in `x402-shop/` is 6/6 pass (`bun` 1.4.0, 681 expects). No local shop process was started. Client landing files were not changed. Live origin `https://volkov.evgeny.m2.fvds.ru` is reachable: OpenAPI 200 (`Devryno x402 Services` `1.12.2`, 41 paths), `/.well-known/x402` 200, unpaid `/pay/ping` 402 (`x402Version` 2, `eip155:8453`, payTo `0xdD1729943bf7C408456cef52886ad12B05B57dC2`). New 1.110.0 paths `/pay/citation-eisbn-exam`, `/pay/citation-eisbn-solutions`, `/pay/citation-author-isni`, `/pay/citation-author-researchid`, `/pay/citation-author-scopus`, and `/pay/citation-isbn-international` are not on the live origin (unpaid probe 404, undeployed). SSH could not authenticate: this environment has no `VPS_SSH_PRIVATE_KEY` and no usable `~/.ssh` identity (`Permission denied (publickey,password)` as `root@volkov.evgeny.m2.fvds.ru` and `ubuntu@volkov.evgeny.m2.fvds.ru`). Requested `VPS_SSH_PRIVATE_KEY` (optional `VPS_SSH_USER`, `VPS_SSH_HOST`) via environment setup actions. rsync/`systemctl restart x402-shop` did not run. Live catalog therefore remains 1.12.2.
+- x402scan `registerFromOrigin`: succeeded (`success: true`, `registered: 34`, `failed: 0`, `skipped: 7`, `total: 41`, `source: openapi`, originId `b2e86a98-1ff4-449d-a288-4cf445a20a4c`). Skipped the same free/claim/quote paths (`/free/merchant-feed-preview`, `/claim/merchant-feed-audit`, `/quote/merchant-feed-audit`, `/claim/base-usdc-receipt`, `/quote/base-usdc-receipt`, `/claim/base-usdc-wallet-statement`, `/quote/base-usdc-wallet-statement`). `checkDiscovery` `found: true`, 41 resources. Live catalog remains Devryno 1.12.2 (undeployed 1.110.0 not indexed yet). New 1.110.0 paths will index after VPS deploy and another register.
