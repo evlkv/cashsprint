@@ -1,0 +1,26 @@
+# CashSprint x402 shop status
+
+- Origin: `https://volkov.evgeny.m2.fvds.ru`
+- Network: Base mainnet USDC (`eip155:8453`, `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`)
+- Receive wallet: `0xdD1729943bf7C408456cef52886ad12B05B57dC2`
+- Shop version: `1.199.0`
+- Batch date: `2026-08-26`
+
+## New paid GET routes this batch
+
+| Path | Price | Query | Description |
+| --- | --- | --- | --- |
+| `/pay/citation-eisbn-tq` | $0.002 | `url` | Highwire Press `name=citation_eisbn_tq` user-assigned-TQ-edition electronic ISBNs |
+| `/pay/citation-isbn-tr` | $0.002 | `url` | Highwire Press `name=citation_isbn_tr` user-assigned-TR-edition ISBNs |
+| `/pay/citation-eisbn-tr` | $0.002 | `url` | Highwire Press `name=citation_eisbn_tr` user-assigned-TR-edition electronic ISBNs |
+| `/pay/citation-isbn-ts` | $0.002 | `url` | Highwire Press `name=citation_isbn_ts` user-assigned-TS-edition ISBNs |
+| `/pay/citation-author-icloudcelluwbnfcbleipv6` | $0.002 | `url` | Highwire Press `name=citation_author_icloudcelluwbnfcbleipv6` author iCloud cellular ultra-wideband NFC BLE IPv6 identifiers |
+| `/pay/citation-author-icloudcelluwbnfcbtip` | $0.002 | `url` | Highwire Press `name=citation_author_icloudcelluwbnfcbtip` author iCloud cellular ultra-wideband NFC Bluetooth IP identifiers |
+
+These paths were not in the live catalog (`ping` … `ns`, plus live extras `offer-proof`, `commerce-page-audit`, `commerce-schema-fix`, `feed-page-match`, `feed-batch-match`, `merchant-feed-audit`), or undeployed batches `1.5.0`–`1.198.0` (`whois` … `citation-author-icloudcelluwbnfcwifiipv6`). `/pay/citation-isbn-tq` remains Highwire citation_isbn_tq; `/pay/citation-eisbn-tp` remains Highwire citation_eisbn_tp; `/pay/citation-isbn-tp` remains Highwire citation_isbn_tp; `/pay/citation-author-icloudcelluwbnfcbleip` remains Highwire citation_author_icloudcelluwbnfcbleip; `/pay/citation-author-icloudcelluwbnfcwifiipv6` remains Highwire citation_author_icloudcelluwbnfcwifiipv6. Do not use `/pay/eisbn-tq` (`/pay/citation-eisbn-tq`; `/pay/citation-isbn-tq` is print TQ; `/pay/citation-eisbn-tp` is eisbn TP; `/pay/citation-eisbn-aa` is eisbn AA), `/pay/isbn-tr` (`/pay/citation-isbn-tr`; `/pay/citation-isbn-tq` is TQ; `/pay/citation-isbn-tp` is TP; `/pay/citation-isbn-aa` is AA), `/pay/eisbn-tr` (`/pay/citation-eisbn-tr`; `/pay/citation-isbn-tr` is print TR; `/pay/citation-eisbn-tq` is eisbn TQ; `/pay/citation-eisbn-aa` is eisbn AA), `/pay/isbn-ts` (`/pay/citation-isbn-ts`; `/pay/citation-isbn-tr` is TR; `/pay/citation-isbn-tq` is TQ; `/pay/citation-isbn-aa` is AA), `/pay/author-icloudcelluwbnfcbleipv6` (`/pay/citation-author-icloudcelluwbnfcbleipv6`; `/pay/citation-author-icloudcellnfcbleipv6` is nfcbleipv6; `/pay/citation-author-icloudcelluwbbleipv6` is uwbbleipv6; `/pay/citation-author-icloudbleipv6` is icloudbleipv6), or `/pay/author-icloudcelluwbnfcbtip` (`/pay/citation-author-icloudcelluwbnfcbtip`; `/pay/citation-author-icloudcellnfcbtip` is nfcbtip; `/pay/citation-author-icloudcelluwbbtip` is uwbbtip; `/pay/citation-author-icloudbtip` is icloudbtip). Remaining Highwire tags include citation_eisbn_ts, citation_isbn_tu, citation_eisbn_tu, citation_isbn_tv, citation_author_icloudcelluwbnfcbtipv6, and citation_author_icloudcelluwbnfcthreadip. Skip `/pay/citation-isbn-sg` / `/pay/citation-eisbn-sg` (Singapore), `/pay/citation-isbn-sh` / `/pay/citation-eisbn-sh` (Saint Helena), `/pay/citation-isbn-sj` / `/pay/citation-eisbn-sj` (Svalbard), `/pay/citation-isbn-re` / `/pay/citation-eisbn-re` (already Reunion-edition in 1.145.0), `/pay/citation-isbn-su` / `/pay/citation-eisbn-su` (Soviet Union, 1.161.0), `/pay/citation-isbn-sv` / `/pay/citation-eisbn-sv` (El Salvador, 1.129.0), `/pay/citation-isbn-sx` / `/pay/citation-eisbn-sx` (Sint Maarten, 1.141.0), `/pay/citation-isbn-ta` / `/pay/citation-eisbn-ta` (Tristan da Cunha, 1.154.0), `/pay/citation-isbn-tc` / `/pay/citation-eisbn-tc` (Turks and Caicos, 1.140.0), `/pay/citation-isbn-tf` / `/pay/citation-eisbn-tf` (French Southern Territories, 1.148.0), `/pay/citation-isbn-th` / `/pay/citation-eisbn-th` (Thailand, 1.119.0), and `/pay/citation-isbn-tt` / `/pay/citation-eisbn-tt` (Trinidad and Tobago, 1.133.0). Client landing files were not changed.
+
+## Deploy / register
+
+- Target: VPS `/opt/x402-shop` via rsync, then `systemctl restart x402-shop`
+- Re-register: `public.resources.registerFromOrigin` for the origin above
+- 2026-08-26 19:03 UTC run: tests and live probes pending before this status is finalized.
