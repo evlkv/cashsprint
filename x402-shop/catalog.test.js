@@ -216,6 +216,33 @@ const BATCH_1_170_0 = ["citation-eisbn-qy", "citation-isbn-qz", "citation-eisbn-
 const BATCH_1_171_0 = ["citation-eisbn-ra", "citation-isbn-rb", "citation-eisbn-rb", "citation-isbn-rc", "citation-author-icloudcellnfcipv6", "citation-author-icloudcellnfcmac"];
 const BATCH_1_172_0 = ["citation-eisbn-rc", "citation-isbn-rd", "citation-eisbn-rd", "citation-isbn-rf", "citation-author-icloudcellnfcgw", "citation-author-icloudcellnfcimei"];
 const BATCH_1_173_0 = ["citation-eisbn-rf", "citation-isbn-rg", "citation-eisbn-rg", "citation-isbn-rh", "citation-author-icloudcellnfcimsi", "citation-author-icloudcellnfciccid"];
+const BATCH_1_174_0 = ["citation-eisbn-rh", "citation-isbn-ri", "citation-eisbn-ri", "citation-isbn-rj", "citation-author-icloudcellnfcmsisdn", "citation-author-icloudcellnfceid"];
+const BATCH_1_175_0 = ["citation-eisbn-rj", "citation-isbn-rk", "citation-eisbn-rk", "citation-isbn-rl", "citation-author-icloudcellnfcuuid", "citation-author-icloudcellnfcsn"];
+const BATCH_1_176_0 = ["citation-eisbn-rl", "citation-isbn-rm", "citation-eisbn-rm", "citation-isbn-rn", "citation-author-icloudcellnfcwifimac", "citation-author-icloudcellnfcbtaddr"];
+const BATCH_1_177_0 = ["citation-eisbn-rn", "citation-isbn-ro", "citation-eisbn-ro", "citation-isbn-rp", "citation-author-icloudcellnfcwifiip", "citation-author-icloudcellnfcblemac"];
+const BATCH_1_178_0 = ["citation-eisbn-rp", "citation-isbn-rq", "citation-eisbn-rq", "citation-isbn-rr", "citation-author-icloudcellnfcbleip", "citation-author-icloudcellnfcwifiipv6"];
+const BATCH_1_179_0 = ["citation-eisbn-rr", "citation-isbn-rs", "citation-eisbn-rs", "citation-isbn-rt", "citation-author-icloudcellnfcbleipv6", "citation-author-icloudcellnfcbtip"];
+const BATCH_1_180_0 = ["citation-eisbn-rt", "citation-isbn-ru", "citation-eisbn-ru", "citation-isbn-rv", "citation-author-icloudcellnfcbtipv6", "citation-author-icloudcelluwbip"];
+const BATCH_1_181_0 = ["citation-eisbn-rv", "citation-isbn-rw", "citation-eisbn-rw", "citation-isbn-rx", "citation-author-icloudcelluwbipv6", "citation-author-icloudcelluwbmac"];
+const BATCH_1_182_0 = ["citation-eisbn-rx", "citation-isbn-ry", "citation-eisbn-ry", "citation-isbn-rz", "citation-author-icloudcelluwbgw", "citation-author-icloudcelluwbimei"];
+const BATCH_1_183_0 = ["citation-eisbn-rz", "citation-isbn-sa", "citation-eisbn-sa", "citation-isbn-sb", "citation-author-icloudcelluwbimsi", "citation-author-icloudcelluwbiccid"];
+const BATCH_1_184_0 = ["citation-eisbn-sb", "citation-isbn-sc", "citation-eisbn-sc", "citation-isbn-sd", "citation-author-icloudcelluwbmsisdn", "citation-author-icloudcelluwbeid"];
+const BATCH_1_185_0 = ["citation-eisbn-sd", "citation-isbn-se", "citation-eisbn-se", "citation-isbn-sf", "citation-author-icloudcelluwbuuid", "citation-author-icloudcelluwbsn"];
+const BATCH_1_186_0 = ["citation-eisbn-sf", "citation-isbn-si", "citation-eisbn-si", "citation-isbn-sk", "citation-author-icloudcelluwbwifimac", "citation-author-icloudcelluwbbtaddr"];
+const BATCH_1_187_0 = ["citation-eisbn-sk", "citation-isbn-sl", "citation-eisbn-sl", "citation-isbn-sm", "citation-author-icloudcelluwbwifiip", "citation-author-icloudcelluwbblemac"];
+const BATCH_1_188_0 = ["citation-eisbn-sm", "citation-isbn-sn", "citation-eisbn-sn", "citation-isbn-so", "citation-author-icloudcelluwbbleip", "citation-author-icloudcelluwbwifiipv6"];
+const BATCH_1_189_0 = ["citation-eisbn-so", "citation-isbn-sp", "citation-eisbn-sp", "citation-isbn-sq", "citation-author-icloudcelluwbbleipv6", "citation-author-icloudcelluwbbtip"];
+const BATCH_1_190_0 = ["citation-eisbn-sq", "citation-isbn-sr", "citation-eisbn-sr", "citation-isbn-ss", "citation-author-icloudcelluwbbtipv6", "citation-author-icloudcelluwbnfcip"];
+const BATCH_1_191_0 = ["citation-eisbn-ss", "citation-isbn-st", "citation-eisbn-st", "citation-isbn-sw", "citation-author-icloudcelluwbnfcipv6", "citation-author-icloudcelluwbnfcmac"];
+const BATCH_1_192_0 = ["citation-eisbn-sw", "citation-isbn-sy", "citation-eisbn-sy", "citation-isbn-sz", "citation-author-icloudcelluwbnfcgw", "citation-author-icloudcelluwbnfcimei"];
+const BATCH_1_193_0 = ["citation-eisbn-sz", "citation-isbn-tb", "citation-eisbn-tb", "citation-isbn-td", "citation-author-icloudcelluwbnfcimsi", "citation-author-icloudcelluwbnfciccid"];
+const BATCH_1_194_0 = ["citation-eisbn-td", "citation-isbn-te", "citation-eisbn-te", "citation-isbn-tg", "citation-author-icloudcelluwbnfcmsisdn", "citation-author-icloudcelluwbnfceid"];
+const BATCH_1_195_0 = ["citation-eisbn-tg", "citation-isbn-tj", "citation-eisbn-tj", "citation-isbn-tk", "citation-author-icloudcelluwbnfcuuid", "citation-author-icloudcelluwbnfcsn"];
+const BATCH_1_196_0 = ["citation-eisbn-tk", "citation-isbn-tl", "citation-eisbn-tl", "citation-isbn-tm", "citation-author-icloudcelluwbnfcwifimac", "citation-author-icloudcelluwbnfcbtaddr"];
+const BATCH_1_197_0 = ["citation-eisbn-tm", "citation-isbn-tn", "citation-eisbn-tn", "citation-isbn-to", "citation-author-icloudcelluwbnfcwifiip", "citation-author-icloudcelluwbnfcblemac"];
+const BATCH_1_198_0 = ["citation-eisbn-to", "citation-isbn-tp", "citation-eisbn-tp", "citation-isbn-tq", "citation-author-icloudcelluwbnfcbleip", "citation-author-icloudcelluwbnfcwifiipv6"];
+const BATCH_1_199_0 = ["citation-eisbn-tq", "citation-isbn-tr", "citation-eisbn-tr", "citation-isbn-ts", "citation-author-icloudcelluwbnfcbleipv6", "citation-author-icloudcelluwbnfcbtip"];
+const BATCH_1_200_0 = ["citation-eisbn-ts", "citation-isbn-tu", "citation-eisbn-tu", "citation-isbn-tv", "citation-author-icloudcelluwbnfcbtipv6", "citation-author-icloudcelluwbnfcthreadip"];
 
 const PRIOR = [
   ...LIVE_1_4_0,
@@ -387,11 +414,38 @@ const PRIOR = [
   ...BATCH_1_170_0,
   ...BATCH_1_171_0,
   ...BATCH_1_172_0,
+  ...BATCH_1_173_0,
+  ...BATCH_1_174_0,
+  ...BATCH_1_175_0,
+  ...BATCH_1_176_0,
+  ...BATCH_1_177_0,
+  ...BATCH_1_178_0,
+  ...BATCH_1_179_0,
+  ...BATCH_1_180_0,
+  ...BATCH_1_181_0,
+  ...BATCH_1_182_0,
+  ...BATCH_1_183_0,
+  ...BATCH_1_184_0,
+  ...BATCH_1_185_0,
+  ...BATCH_1_186_0,
+  ...BATCH_1_187_0,
+  ...BATCH_1_188_0,
+  ...BATCH_1_189_0,
+  ...BATCH_1_190_0,
+  ...BATCH_1_191_0,
+  ...BATCH_1_192_0,
+  ...BATCH_1_193_0,
+  ...BATCH_1_194_0,
+  ...BATCH_1_195_0,
+  ...BATCH_1_196_0,
+  ...BATCH_1_197_0,
+  ...BATCH_1_198_0,
+  ...BATCH_1_199_0,
 ];
 
-test("shop version is 1.173.0", () => {
-  expect(pkg.version).toBe("1.173.0");
-  expect(source).toContain('const VERSION = "1.173.0"');
+test("shop version is 1.200.0", () => {
+  expect(pkg.version).toBe("1.200.0");
+  expect(source).toContain('const VERSION = "1.200.0"');
 });
 
 test("pay routes are unique", () => {
@@ -405,21 +459,21 @@ test("keeps live and previous catalog paths", () => {
   }
 });
 
-test("adds six new 1.173.0 pay routes", () => {
-  for (const name of BATCH_1_173_0) {
+test("adds six new 1.200.0 pay routes", () => {
+  for (const name of BATCH_1_200_0) {
     expect(routePaths).toContain(`/pay/${name}`);
   }
 });
 
 test("new routes are not duplicates of earlier catalogs", () => {
   const prior = new Set([...PRIOR, ...LIVE_EXTRA]);
-  for (const name of BATCH_1_173_0) {
+  for (const name of BATCH_1_200_0) {
     expect(prior.has(name)).toBe(false);
   }
 });
 
 test("keccak256 and EIP-55 helpers", () => {
-  expect(VERSION).toBe("1.173.0");
+  expect(VERSION).toBe("1.200.0");
   expect(keccak256Hex("")).toBe("c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470");
   expect(keccak256Hex("hello")).toBe("1c8aff950685c2ed4bc3174f3472287b56d9517b9c948127319a09a7a36deac8");
   expect(selector("totalSupply()")).toBe("0x18160ddd");
