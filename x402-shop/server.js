@@ -2,7 +2,7 @@ const PAY_TO = "0xdD1729943bf7C408456cef52886ad12B05B57dC2";
 const USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const NETWORK = "eip155:8453";
 const ORIGIN = process.env.ORIGIN || "https://volkov.evgeny.m2.fvds.ru";
-const VERSION = "1.195.0";
+const VERSION = "1.196.0";
 const PORT = Number(process.env.PORT || 4021);
 const FACILITATOR = (process.env.FACILITATOR_URL || "https://facilitator.payai.network").replace(/\/$/, "");
 const BASE_RPC = process.env.BASE_RPC || "https://mainnet.base.org";
@@ -31829,6 +31829,186 @@ const ROUTES = {
       const sliced = items.slice(0, 20);
       const first = sliced[0] || { name: "", content: "" };
       return { url: fetched.url, citationAuthorIcloudcelluwbnfcsn: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+  "/pay/citation-eisbn-tk": {
+    summary: "Highwire citation_eisbn_tk",
+    description: "Extract Highwire Press name=citation_eisbn_tk user-assigned-TK-edition electronic ISBNs from a public page. Distinct from Highwire citation_isbn_tk on /pay/citation-isbn-tk, Highwire citation_eisbn_tj on /pay/citation-eisbn-tj, Highwire citation_eisbn_tg on /pay/citation-eisbn-tg, and Highwire citation_eisbn_aa on /pay/citation-eisbn-aa. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: "https://example.com", citationEisbnTk: "978-0-00-1371-8", name: "citation_eisbn_tk", count: 1, items: [{ name: "citation_eisbn_tk", content: "978-0-00-1371-8" }] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== "citation-eisbn-tk" &&
+          name !== "citation_eisbn_tk" &&
+          name !== "citationeisbntk"
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationEisbnTk: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+  "/pay/citation-isbn-tl": {
+    summary: "Highwire citation_isbn_tl",
+    description: "Extract Highwire Press name=citation_isbn_tl user-assigned-TL-edition ISBNs from a public page. Distinct from Highwire citation_isbn_tk on /pay/citation-isbn-tk, Highwire citation_isbn_tj on /pay/citation-isbn-tj, Highwire citation_isbn_tg on /pay/citation-isbn-tg, and Highwire citation_isbn_aa on /pay/citation-isbn-aa. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: "https://example.com", citationIsbnTl: "978-0-00-1372-5", name: "citation_isbn_tl", count: 1, items: [{ name: "citation_isbn_tl", content: "978-0-00-1372-5" }] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== "citation-isbn-tl" &&
+          name !== "citation_isbn_tl" &&
+          name !== "citationisbntl"
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationIsbnTl: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+  "/pay/citation-eisbn-tl": {
+    summary: "Highwire citation_eisbn_tl",
+    description: "Extract Highwire Press name=citation_eisbn_tl user-assigned-TL-edition electronic ISBNs from a public page. Distinct from Highwire citation_isbn_tl on /pay/citation-isbn-tl, Highwire citation_eisbn_tk on /pay/citation-eisbn-tk, Highwire citation_eisbn_tj on /pay/citation-eisbn-tj, and Highwire citation_eisbn_aa on /pay/citation-eisbn-aa. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: "https://example.com", citationEisbnTl: "978-0-00-1373-2", name: "citation_eisbn_tl", count: 1, items: [{ name: "citation_eisbn_tl", content: "978-0-00-1373-2" }] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== "citation-eisbn-tl" &&
+          name !== "citation_eisbn_tl" &&
+          name !== "citationeisbntl"
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationEisbnTl: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+  "/pay/citation-isbn-tm": {
+    summary: "Highwire citation_isbn_tm",
+    description: "Extract Highwire Press name=citation_isbn_tm user-assigned-TM-edition ISBNs from a public page. Distinct from Highwire citation_isbn_tl on /pay/citation-isbn-tl, Highwire citation_isbn_tk on /pay/citation-isbn-tk, Highwire citation_isbn_tj on /pay/citation-isbn-tj, and Highwire citation_isbn_aa on /pay/citation-isbn-aa. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: "https://example.com", citationIsbnTm: "978-0-00-1374-9", name: "citation_isbn_tm", count: 1, items: [{ name: "citation_isbn_tm", content: "978-0-00-1374-9" }] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== "citation-isbn-tm" &&
+          name !== "citation_isbn_tm" &&
+          name !== "citationisbntm"
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationIsbnTm: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+  "/pay/citation-author-icloudcelluwbnfcwifimac": {
+    summary: "Highwire citation_author_icloudcelluwbnfcwifimac",
+    description: "Extract Highwire Press name=citation_author_icloudcelluwbnfcwifimac author iCloud cellular ultra-wideband NFC Wi-Fi MAC identifiers from a public page. Distinct from Highwire citation_author_icloudcelluwbnfcsn on /pay/citation-author-icloudcelluwbnfcsn, Highwire citation_author_icloudcellnfcwifimac on /pay/citation-author-icloudcellnfcwifimac, Highwire citation_author_icloudcelluwbwifimac on /pay/citation-author-icloudcelluwbwifimac, and Highwire citation_author_icloudwifimac on /pay/citation-author-icloudwifimac. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: "https://example.com", citationAuthorIcloudcelluwbnfcwifimac: "icloudcelluwbnfcwifimac:@citation.author", name: "citation_author_icloudcelluwbnfcwifimac", count: 1, items: [{ name: "citation_author_icloudcelluwbnfcwifimac", content: "icloudcelluwbnfcwifimac:@citation.author" }] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== "citation-author-icloudcelluwbnfcwifimac" &&
+          name !== "citation_author_icloudcelluwbnfcwifimac" &&
+          name !== "citationauthoricloudcelluwbnfcwifimac"
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationAuthorIcloudcelluwbnfcwifimac: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+  "/pay/citation-author-icloudcelluwbnfcbtaddr": {
+    summary: "Highwire citation_author_icloudcelluwbnfcbtaddr",
+    description: "Extract Highwire Press name=citation_author_icloudcelluwbnfcbtaddr author iCloud cellular ultra-wideband NFC Bluetooth-address identifiers from a public page. Distinct from Highwire citation_author_icloudcelluwbnfcwifimac on /pay/citation-author-icloudcelluwbnfcwifimac, Highwire citation_author_icloudcellnfcbtaddr on /pay/citation-author-icloudcellnfcbtaddr, Highwire citation_author_icloudcelluwbbtaddr on /pay/citation-author-icloudcelluwbbtaddr, and Highwire citation_author_icloudbtaddr on /pay/citation-author-icloudbtaddr. $0.002 USDC on Base.",
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: "https://example.com", citationAuthorIcloudcelluwbnfcbtaddr: "icloudcelluwbnfcbtaddr:@citation.author", name: "citation_author_icloudcelluwbnfcbtaddr", count: 1, items: [{ name: "citation_author_icloudcelluwbnfcbtaddr", content: "icloudcelluwbnfcbtaddr:@citation.author" }] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== "citation-author-icloudcelluwbnfcbtaddr" &&
+          name !== "citation_author_icloudcelluwbnfcbtaddr" &&
+          name !== "citationauthoricloudcelluwbnfcbtaddr"
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationAuthorIcloudcelluwbnfcbtaddr: first.content, name: first.name, count: sliced.length, items: sliced };
     },
   },
 };
