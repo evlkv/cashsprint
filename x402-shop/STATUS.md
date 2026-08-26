@@ -1,0 +1,27 @@
+# CashSprint x402 shop status
+
+- Origin: `https://volkov.evgeny.m2.fvds.ru`
+- Network: Base mainnet USDC (`eip155:8453`, `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`)
+- Receive wallet: `0xdD1729943bf7C408456cef52886ad12B05B57dC2`
+- Shop version: `1.198.0`
+- Batch date: `2026-08-26`
+
+## New paid GET routes this batch
+
+| Path | Price | Query | Description |
+| --- | --- | --- | --- |
+| `/pay/citation-eisbn-to` | $0.002 | `url` | Highwire Press `name=citation_eisbn_to` user-assigned-TO-edition electronic ISBNs |
+| `/pay/citation-isbn-tp` | $0.002 | `url` | Highwire Press `name=citation_isbn_tp` user-assigned-TP-edition ISBNs |
+| `/pay/citation-eisbn-tp` | $0.002 | `url` | Highwire Press `name=citation_eisbn_tp` user-assigned-TP-edition electronic ISBNs |
+| `/pay/citation-isbn-tq` | $0.002 | `url` | Highwire Press `name=citation_isbn_tq` user-assigned-TQ-edition ISBNs |
+| `/pay/citation-author-icloudcelluwbnfcbleip` | $0.002 | `url` | Highwire Press `name=citation_author_icloudcelluwbnfcbleip` author iCloud cellular ultra-wideband NFC BLE IP identifiers |
+| `/pay/citation-author-icloudcelluwbnfcwifiipv6` | $0.002 | `url` | Highwire Press `name=citation_author_icloudcelluwbnfcwifiipv6` author iCloud cellular ultra-wideband NFC Wi-Fi IPv6 identifiers |
+
+These paths were not in the live catalog (`ping` … `ns`, plus live extras `offer-proof`, `commerce-page-audit`, `commerce-schema-fix`, `feed-page-match`, `feed-batch-match`, `merchant-feed-audit`), or undeployed batches `1.5.0`–`1.197.0` (`whois` … `citation-author-icloudcelluwbnfcblemac`). `/pay/citation-isbn-to` remains Highwire citation_isbn_to; `/pay/citation-eisbn-tn` remains Highwire citation_eisbn_tn; `/pay/citation-isbn-tn` remains Highwire citation_isbn_tn; `/pay/citation-author-icloudcelluwbnfcblemac` remains Highwire citation_author_icloudcelluwbnfcblemac; `/pay/citation-author-icloudcelluwbnfcwifiip` remains Highwire citation_author_icloudcelluwbnfcwifiip. Do not use `/pay/eisbn-to` (`/pay/citation-eisbn-to`; `/pay/citation-isbn-to` is print TO; `/pay/citation-eisbn-tn` is eisbn TN; `/pay/citation-eisbn-aa` is eisbn AA), `/pay/isbn-tp` (`/pay/citation-isbn-tp`; `/pay/citation-isbn-to` is TO; `/pay/citation-isbn-tn` is TN; `/pay/citation-isbn-aa` is AA), `/pay/eisbn-tp` (`/pay/citation-eisbn-tp`; `/pay/citation-isbn-tp` is print TP; `/pay/citation-eisbn-to` is eisbn TO; `/pay/citation-eisbn-aa` is eisbn AA), `/pay/isbn-tq` (`/pay/citation-isbn-tq`; `/pay/citation-isbn-tp` is TP; `/pay/citation-isbn-to` is TO; `/pay/citation-isbn-aa` is AA), `/pay/author-icloudcelluwbnfcbleip` (`/pay/citation-author-icloudcelluwbnfcbleip`; `/pay/citation-author-icloudcellnfcbleip` is nfcbleip; `/pay/citation-author-icloudcelluwbbleip` is uwbbleip; `/pay/citation-author-icloudbleip` is icloudbleip), or `/pay/author-icloudcelluwbnfcwifiipv6` (`/pay/citation-author-icloudcelluwbnfcwifiipv6`; `/pay/citation-author-icloudcellnfcwifiipv6` is nfcwifiipv6; `/pay/citation-author-icloudcelluwbwifiipv6` is uwbwifiipv6; `/pay/citation-author-icloudwifiipv6` is icloudwifiipv6). Remaining Highwire tags include citation_eisbn_tq, citation_isbn_tr, citation_eisbn_tr, citation_isbn_ts, citation_author_icloudcelluwbnfcbleipv6, and citation_author_icloudcelluwbnfcbtip. Skip `/pay/citation-isbn-sg` / `/pay/citation-eisbn-sg` (Singapore), `/pay/citation-isbn-sh` / `/pay/citation-eisbn-sh` (Saint Helena), `/pay/citation-isbn-sj` / `/pay/citation-eisbn-sj` (Svalbard), `/pay/citation-isbn-re` / `/pay/citation-eisbn-re` (already Reunion-edition in 1.145.0), `/pay/citation-isbn-su` / `/pay/citation-eisbn-su` (Soviet Union, 1.161.0), `/pay/citation-isbn-sv` / `/pay/citation-eisbn-sv` (El Salvador, 1.129.0), `/pay/citation-isbn-sx` / `/pay/citation-eisbn-sx` (Sint Maarten, 1.141.0), `/pay/citation-isbn-ta` / `/pay/citation-eisbn-ta` (Tristan da Cunha, 1.154.0), `/pay/citation-isbn-tc` / `/pay/citation-eisbn-tc` (Turks and Caicos, 1.140.0), `/pay/citation-isbn-tf` / `/pay/citation-eisbn-tf` (French Southern Territories, 1.148.0), and `/pay/citation-isbn-th` / `/pay/citation-eisbn-th` (Thailand, 1.119.0). Client landing files were not changed.
+
+## Deploy / register
+
+- Target: VPS `/opt/x402-shop` via rsync, then `systemctl restart x402-shop`
+- Re-register: `public.resources.registerFromOrigin` for the origin above
+- 2026-08-26 18:05 UTC run: `bun test` in `x402-shop/` is 6/6 pass (`bun` 1.4.0, 1209 expects). No local shop process was started. Client landing files were not changed. Live origin `https://volkov.evgeny.m2.fvds.ru` answers HTTPS (nginx/1.24.0, OpenAPI Devryno 1.13.2, 43 paths). Unpaid `/pay/ping` is 402 (`x402Version` 2, `eip155:8453`). Unpaid `/pay/citation-eisbn-to` and `/pay/citation-isbn-tp` (and the other four 1.198.0 paths) are 404. This environment has no `VPS_SSH_PRIVATE_KEY` and no usable `~/.ssh` identity; SSH answers, but `root@`/`ubuntu@`/`evgeny@` are Permission denied (publickey,password). Requested `VPS_SSH_PRIVATE_KEY` (optional `VPS_SSH_USER`, `VPS_SSH_HOST`) via environment setup actions. rsync/`systemctl restart x402-shop` did not run.
+- x402scan `registerFromOrigin`: succeeded (`success: true`, registered 34, failed 0, skipped 9 free/claim/quote paths, originId `b2e86a98-1ff4-449d-a288-4cf445a20a4c`). `checkDiscovery` `found: true`, `resourceCount: 43`, source `openapi`. Live catalog remains 1.13.2 until VPS deploy; new 1.198.0 paths will index after rsync/restart and another register.
