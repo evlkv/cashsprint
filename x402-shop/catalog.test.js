@@ -438,6 +438,7 @@ const BATCH_1_392_0 = ["citation-eisbn-ajh", "citation-isbn-aji", "citation-eisb
 const BATCH_1_393_0 = ["citation-eisbn-ajj", "citation-isbn-ajk", "citation-eisbn-ajk", "citation-isbn-ajl", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbtwifi", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiip"];
 const BATCH_1_394_0 = ["citation-eisbn-ajl", "citation-isbn-ajm", "citation-eisbn-ajm", "citation-isbn-ajn", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6"];
 const BATCH_1_395_0 = ["citation-eisbn-ajn", "citation-isbn-ajo", "citation-eisbn-ajo", "citation-isbn-ajp", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbtip", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbtipv6"];
+const BATCH_1_396_0 = ["citation-eisbn-ajp", "citation-isbn-ajq", "citation-eisbn-ajq", "citation-isbn-ajr", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcip", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcipv6"];
 
 const PRIOR = [
   ...LIVE_1_4_0,
@@ -831,11 +832,12 @@ const PRIOR = [
   ...BATCH_1_392_0,
   ...BATCH_1_393_0,
   ...BATCH_1_394_0,
+  ...BATCH_1_395_0,
 ];
 
-test("shop version is 1.395.0", () => {
-  expect(pkg.version).toBe("1.395.0");
-  expect(source).toContain('const VERSION = "1.395.0"');
+test("shop version is 1.396.0", () => {
+  expect(pkg.version).toBe("1.396.0");
+  expect(source).toContain('const VERSION = "1.396.0"');
 });
 
 test("pay routes are unique", () => {
@@ -849,21 +851,21 @@ test("keeps live and previous catalog paths", () => {
   }
 });
 
-test("adds six new 1.395.0 pay routes", () => {
-  for (const name of BATCH_1_395_0) {
+test("adds six new 1.396.0 pay routes", () => {
+  for (const name of BATCH_1_396_0) {
     expect(routePaths).toContain(`/pay/${name}`);
   }
 });
 
 test("new routes are not duplicates of earlier catalogs", () => {
   const prior = new Set([...PRIOR, ...LIVE_EXTRA]);
-  for (const name of BATCH_1_395_0) {
+  for (const name of BATCH_1_396_0) {
     expect(prior.has(name)).toBe(false);
   }
 });
 
 test("keccak256 and EIP-55 helpers", () => {
-  expect(VERSION).toBe("1.395.0");
+  expect(VERSION).toBe("1.396.0");
   expect(keccak256Hex("")).toBe("c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470");
   expect(keccak256Hex("hello")).toBe("1c8aff950685c2ed4bc3174f3472287b56d9517b9c948127319a09a7a36deac8");
   expect(selector("totalSupply()")).toBe("0x18160ddd");
