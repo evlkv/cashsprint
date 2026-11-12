@@ -568,6 +568,7 @@ const BATCH_1_522_0 = ["citation-eisbn-ath", "citation-isbn-ati", "citation-eisb
 const BATCH_1_523_0 = ["citation-eisbn-atj", "citation-isbn-atk", "citation-eisbn-atk", "citation-isbn-atl", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbtwifi", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiip"];
 const BATCH_1_525_0 = ["citation-eisbn-atn", "citation-isbn-ato", "citation-eisbn-ato", "citation-isbn-atp", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbtip", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbtipv6"];
 const BATCH_1_524_0 = ["citation-eisbn-atl", "citation-isbn-atm", "citation-eisbn-atm", "citation-isbn-atn", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6"];
+const BATCH_1_526_0 = ["citation-eisbn-atp", "citation-isbn-atq", "citation-eisbn-atq", "citation-isbn-atr", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcip", "citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcipv6"];
 
 const PRIOR = [
   ...LIVE_1_4_0,
@@ -1091,11 +1092,12 @@ const PRIOR = [
   ...BATCH_1_522_0,
   ...BATCH_1_523_0,
   ...BATCH_1_524_0,
+  ...BATCH_1_525_0,
 ];
 
-test("shop version is 1.525.0", () => {
-  expect(pkg.version).toBe("1.525.0");
-  expect(source).toContain('const VERSION = "1.525.0"');
+test("shop version is 1.526.0", () => {
+  expect(pkg.version).toBe("1.526.0");
+  expect(source).toContain('const VERSION = "1.526.0"');
 });
 
 test("pay routes are unique", () => {
@@ -1109,21 +1111,21 @@ test("keeps live and previous catalog paths", () => {
   }
 });
 
-test("adds six new 1.525.0 pay routes", () => {
-  for (const name of BATCH_1_525_0) {
+test("adds six new 1.526.0 pay routes", () => {
+  for (const name of BATCH_1_526_0) {
     expect(routePaths).toContain(`/pay/${name}`);
   }
 });
 
 test("new routes are not duplicates of earlier catalogs", () => {
   const prior = new Set([...PRIOR, ...LIVE_EXTRA]);
-  for (const name of BATCH_1_525_0) {
+  for (const name of BATCH_1_526_0) {
     expect(prior.has(name)).toBe(false);
   }
 });
 
 test("keccak256 and EIP-55 helpers", () => {
-  expect(VERSION).toBe("1.525.0");
+  expect(VERSION).toBe("1.526.0");
   expect(keccak256Hex("")).toBe("c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470");
   expect(keccak256Hex("hello")).toBe("1c8aff950685c2ed4bc3174f3472287b56d9517b9c948127319a09a7a36deac8");
   expect(selector("totalSupply()")).toBe("0x18160ddd");
