@@ -2,7 +2,7 @@ const PAY_TO = "0xdD1729943bf7C408456cef52886ad12B05B57dC2";
 const USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const NETWORK = "eip155:8453";
 const ORIGIN = process.env.ORIGIN || "https://volkov.evgeny.m2.fvds.ru";
-const VERSION = "1.538.0";
+const VERSION = "1.539.0";
 const PORT = Number(process.env.PORT || 4021);
 const FACILITATOR = (process.env.FACILITATOR_URL || "https://facilitator.payai.network").replace(/\/$/, "");
 const BASE_RPC = process.env.BASE_RPC || "https://mainnet.base.org";
@@ -94050,6 +94050,199 @@ const ROUTES = {
       return { url: fetched.url, citationAuthorIcloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiip: first.content, name: first.name, count: sliced.length, items: sliced };
     },
   },
+
+
+  "/pay/citation-eisbn-aup": {
+    summary: 'Highwire citation_eisbn_aup',
+    description: 'Extract Highwire Press name=citation_eisbn_aup user-assigned-AUP-edition electronic ISBNs from a public page. Distinct from Highwire citation_isbn_aup on /pay/citation-isbn-aup, Highwire citation_eisbn_auo on /pay/citation-eisbn-auo, Highwire citation_eisbn_aun on /pay/citation-eisbn-aun, Highwire citation_eisbn_aum on /pay/citation-eisbn-aum. $0.002 USDC on Base.',
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: 'https://example.com', citationEisbnAup: '978-0-00-2743-6', name: 'citation_eisbn_aup', count: 1, items: [ { name: 'citation_eisbn_aup', content: '978-0-00-2743-6' } ] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== 'citation-eisbn-aup' &&
+          name !== 'citation_eisbn_aup' &&
+          name !== 'citationeisbnaup'
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationEisbnAup: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+
+
+  "/pay/citation-isbn-auq": {
+    summary: 'Highwire citation_isbn_auq',
+    description: 'Extract Highwire Press name=citation_isbn_auq user-assigned-AUQ-edition ISBNs from a public page. Distinct from Highwire citation_isbn_aup on /pay/citation-isbn-aup, Highwire citation_isbn_auo on /pay/citation-isbn-auo, Highwire citation_isbn_aun on /pay/citation-isbn-aun, Highwire citation_isbn_aum on /pay/citation-isbn-aum. $0.002 USDC on Base.',
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: 'https://example.com', citationIsbnAuq: '978-0-00-2744-3', name: 'citation_isbn_auq', count: 1, items: [ { name: 'citation_isbn_auq', content: '978-0-00-2744-3' } ] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== 'citation-isbn-auq' &&
+          name !== 'citation_isbn_auq' &&
+          name !== 'citationisbnauq'
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationIsbnAuq: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+
+
+  "/pay/citation-eisbn-auq": {
+    summary: 'Highwire citation_eisbn_auq',
+    description: 'Extract Highwire Press name=citation_eisbn_auq user-assigned-AUQ-edition electronic ISBNs from a public page. Distinct from Highwire citation_isbn_auq on /pay/citation-isbn-auq, Highwire citation_eisbn_aup on /pay/citation-eisbn-aup, Highwire citation_eisbn_auo on /pay/citation-eisbn-auo, Highwire citation_eisbn_aun on /pay/citation-eisbn-aun. $0.002 USDC on Base.',
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: 'https://example.com', citationEisbnAuq: '978-0-00-2745-0', name: 'citation_eisbn_auq', count: 1, items: [ { name: 'citation_eisbn_auq', content: '978-0-00-2745-0' } ] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== 'citation-eisbn-auq' &&
+          name !== 'citation_eisbn_auq' &&
+          name !== 'citationeisbnauq'
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationEisbnAuq: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+
+
+  "/pay/citation-isbn-aur": {
+    summary: 'Highwire citation_isbn_aur',
+    description: 'Extract Highwire Press name=citation_isbn_aur user-assigned-AUR-edition ISBNs from a public page. Distinct from Highwire citation_isbn_auq on /pay/citation-isbn-auq, Highwire citation_isbn_aup on /pay/citation-isbn-aup, Highwire citation_isbn_auo on /pay/citation-isbn-auo, Highwire citation_isbn_aun on /pay/citation-isbn-aun. $0.002 USDC on Base.',
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: 'https://example.com', citationIsbnAur: '978-0-00-2746-7', name: 'citation_isbn_aur', count: 1, items: [ { name: 'citation_isbn_aur', content: '978-0-00-2746-7' } ] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== 'citation-isbn-aur' &&
+          name !== 'citation_isbn_aur' &&
+          name !== 'citationisbnaur'
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationIsbnAur: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+
+
+  "/pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6": {
+    summary: 'Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6',
+    description: 'Extract Highwire Press name=citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6 author iCloud cellular ultra-wideband NFC Thread NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC Wi-Fi IPv6 identifiers from a public page. Distinct from Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6 on /pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6, Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6 on /pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6, Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6 on /pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6, Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiip on /pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiip. $0.002 USDC on Base.',
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: 'https://example.com', citationAuthorIcloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6: 'icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6:@citation.author', name: 'citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6', count: 1, items: [ { name: 'citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6', content: 'icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6:@citation.author' } ] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== 'citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6' &&
+          name !== 'citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6' &&
+          name !== 'citationauthoricloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6'
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationAuthorIcloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+
+
+  "/pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6": {
+    summary: 'Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6',
+    description: 'Extract Highwire Press name=citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6 author iCloud cellular ultra-wideband NFC Thread NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC NFC BLE IPv6 identifiers from a public page. Distinct from Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6 on /pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6, Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6 on /pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6, Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6 on /pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcwifiipv6, Highwire citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbtwifi on /pay/citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbtwifi. $0.002 USDC on Base.',
+    price: "0.002",
+    params: [{ name: "url", required: true }],
+    queryExample: { url: "https://example.com" },
+    example: { url: 'https://example.com', citationAuthorIcloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6: 'icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6:@citation.author', name: 'citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6', count: 1, items: [ { name: 'citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6', content: 'icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6:@citation.author' } ] },
+    handler: async (q) => {
+      const fetched = await fetchPublic(q.get("url"));
+      const tags = fetched.text.match(/<meta\b[^>]*>/gi) || [];
+      const items = [];
+      const seen = new Set();
+      for (const tag of tags) {
+        const name = ((tag.match(/\bname=["']([^"']+)["']/i) || [])[1] || "").toLowerCase();
+        if (
+          name !== 'citation-author-icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6' &&
+          name !== 'citation_author_icloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6' &&
+          name !== 'citationauthoricloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6'
+        ) continue;
+        const content = decodeEntities((tag.match(/\bcontent=["']([^"']*)["']/i) || [])[1] || "").trim();
+        const key = `${name}:${content}`;
+        if (!content || seen.has(key)) continue;
+        seen.add(key);
+        items.push({ name, content });
+      }
+      const sliced = items.slice(0, 20);
+      const first = sliced[0] || { name: "", content: "" };
+      return { url: fetched.url, citationAuthorIcloudcelluwbnfcthreadnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcnfcbleipv6: first.content, name: first.name, count: sliced.length, items: sliced };
+    },
+  },
+
 
 };
 
